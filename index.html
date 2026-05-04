@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nguyen Kieu Hung | Senior Business Analyst Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0a2647;
+            --accent: #b08968;
+            --gold: #d4af37;
+            --white: #ffffff;
+            --bg-light: #f4f7f9;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; color: #333; line-height: 1.6; background: var(--white); }
+        .container { max-width: 1050px; margin: 0 auto; padding: 0 20px; }
+
+        /* Language Switcher */
+        .lang-switcher { position: fixed; top: 20px; right: 20px; z-index: 1000; background: white; padding: 5px; border-radius: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border: 1px solid #ddd; }
+        .lang-btn { padding: 8px 18px; border: none; cursor: pointer; border-radius: 25px; font-weight: 600; font-size: 0.8rem; transition: 0.3s; background: transparent; }
+        .lang-btn.active { background: var(--primary); color: white; }
+
+        /* Header & Profile */
+        header { padding: 100px 0 60px; background: linear-gradient(135deg, #f1f4f8 0%, #dbe2e9 100%); }
+        .hero { display: flex; align-items: center; gap: 40px; flex-wrap: wrap; }
+        .profile-img { width: 220px; height: 220px; border-radius: 50%; border: 5px solid white; box-shadow: 0 10px 25px rgba(0,0,0,0.1); object-fit: cover; }
+        .hero-text h1 { font-size: 3rem; color: var(--primary); margin-bottom: 10px; }
+        .hero-text .role { font-size: 1.3rem; color: var(--accent); font-weight: 700; margin-bottom: 20px; text-transform: uppercase; }
+        
+        .contact-info { display: flex; gap: 20px; margin-top: 15px; flex-wrap: wrap; }
+        .contact-info span { font-weight: 600; color: var(--primary); font-size: 0.95rem; }
+
+        /* CCBA Badge Highlight */
+        .featured-badge { background: var(--primary); color: white; padding: 35px; border-radius: 15px; margin: -40px auto 50px; display: flex; align-items: center; gap: 35px; box-shadow: 0 15px 35px rgba(10,38,71,0.2); border: 1px solid rgba(212,175,55,0.3); }
+        .badge-svg { width: 100px; height: 100px; filter: drop-shadow(0 0 10px rgba(212,175,55,0.5)); }
+        .badge-info h3 { color: var(--gold); font-size: 1.6rem; margin-bottom: 8px; }
+        .badge-info a { color: #81b1e7; text-decoration: none; border-bottom: 1px solid; padding-bottom: 2px; font-weight: 600; }
+
+        /* Sections */
+        section { padding: 60px 0; }
+        .section-title { font-size: 2rem; color: var(--primary); margin-bottom: 40px; border-left: 6px solid var(--accent); padding-left: 20px; text-transform: uppercase; letter-spacing: 1px; }
+
+        /* Experience detail */
+        .exp-item { margin-bottom: 50px; position: relative; }
+        .exp-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 15px; flex-wrap: wrap; }
+        .exp-role { font-size: 1.4rem; font-weight: 700; color: var(--primary); }
+        .exp-comp { font-weight: 600; color: var(--accent); font-size: 1.1rem; }
+        .exp-date { font-size: 0.85rem; font-weight: 700; color: #555; background: #eef2f6; padding: 4px 14px; border-radius: 20px; }
+        
+        .award-tag { display: inline-block; background: #fffbeb; color: #92400e; padding: 8px 16px; border-radius: 8px; font-weight: 700; margin: 10px 0; border: 1px solid #fef3c7; font-size: 0.9rem; }
+        
+        .exp-list { list-style: none; margin-top: 15px; }
+        .exp-list li { margin-bottom: 12px; position: relative; padding-left: 25px; text-align: justify; }
+        .exp-list li::before { content: '◈'; position: absolute; left: 0; color: var(--accent); }
+        
+        .project-tag-box { background: #f8fafc; padding: 20px; border-radius: 10px; border-left: 5px solid var(--primary); margin-top: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+
+        /* Education & Skills */
+        .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; }
+        .edu-card { padding: 25px; background: var(--bg-light); border-radius: 12px; border: 1px solid #e2e8f0; transition: 0.3s; }
+        .edu-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
+        
+        .skills-flex { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 15px; }
+        .skill-tag { background: white; padding: 8px 15px; border-radius: 6px; font-weight: 600; border: 1px solid #cbd5e1; font-size: 0.9rem; color: var(--primary); }
+
+        /* Language Toggle */
+        .lang-vi { display: none; }
+        body.vi .lang-en { display: none; }
+        body.vi .lang-vi { display: block; }
+
+        footer { background: #0a192f; color: #94a3b8; padding: 60px 0; text-align: center; }
+        .footer-contact { margin-bottom: 25px; display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; }
+        .footer-contact a { color: var(--white); text-decoration: none; font-weight: 600; }
+
+        @media (max-width: 768px) { .hero { flex-direction: column; text-align: center; } .contact-info { justify-content: center; } .featured-badge { flex-direction: column; text-align: center; } }
+    </style>
+</head>
+<body>
+
+    <div class="lang-switcher">
+        <button class="lang-btn active" onclick="setLang('en')">EN</button>
+        <button class="lang-btn" onclick="setLang('vi')">VI</button>
+    </div>
+
+    <header>
+        <div class="container hero">
+            <img src="avatar_hung.jpg" alt="Nguyen Kieu Hung" class="profile-img">
+            <div class="hero-text">
+                <h1>Nguyen Kieu Hung</h1>
+                <div class="role">Senior Business Analyst | CCBA®</div>
+                <div class="contact-info">
+                    <span>📞 0387728686</span>
+                    <span>✉️ hungnk0203@gmail.com</span>
+                    <span class="lang-en">📍 Hanoi, Vietnam</span>
+                    <span class="lang-vi">📍 Hà Nội, Việt Nam</span>
+                </div>
+                <p style="margin-top:20px; font-size: 1.1rem;" class="lang-en">Strategic Business Analyst with 5+ years of experience. Expert in bridging business needs with technical solutions, specialized in data governance and national-scale systems.</p>
+                <p style="margin-top:20px; font-size: 1.1rem;" class="lang-vi">Chuyên gia phân tích nghiệp vụ với hơn 5 năm kinh nghiệm. Thế mạnh kết nối nhu cầu kinh doanh với giải pháp kỹ thuật, chuyên sâu về quản trị dữ liệu và hệ thống quy mô quốc gia.</p>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="featured-badge">
+            <!-- SVG CCBA Badge - Không bao giờ lỗi hình ảnh -->
+            <svg class="badge-svg" viewBox="0 0 100 100">
+                <circle cx="50" cy="50" r="45" fill="#d4af37"/>
+                <path d="M50 15L58.5 35H79L62.5 48L69 68L50 56L31 68L37.5 48L21 35H41.5L50 15Z" fill="white"/>
+                <circle cx="50" cy="50" r="48" fill="none" stroke="white" stroke-width="2"/>
+                <text x="50" y="85" text-anchor="middle" fill="white" font-size="8" font-weight="bold" font-family="Arial">CCBA® IIBA</text>
+            </svg>
+            <div class="badge-info">
+                <h3 class="lang-en">CCBA® Certified Professional</h3>
+                <h3 class="lang-vi">Chuyên gia Chứng chỉ CCBA®</h3>
+                <p class="lang-en">Certification of Capability in Business Analysis™ - Issued by IIBA®</p>
+                <p class="lang-vi">Chứng chỉ năng lực phân tích nghiệp vụ chuyên nghiệp - Cấp bởi IIBA®</p>
+                <a href="https://badges.iiba.org/b84535ea-8c98-4ed6-961e-e166c20acd4d#acc.1QdZMg3h" target="_blank">Verify Credential Online →</a>
+            </div>
+        </div>
+    </div>
+
+    <section class="container">
+        <h2 class="section-title lang-en">Professional Experience</h2>
+        <h2 class="section-title lang-vi">Kinh nghiệm chuyên môn</h2>
+
+        <!-- VNPT IT -->
+        <div class="exp-item">
+            <div class="exp-header">
+                <div>
+                    <div class="exp-role">Business Analyst</div>
+                    <div class="exp-comp">VNPT Information Technology</div>
+                </div>
+                <div class="exp-date">06/2021 - Present</div>
+            </div>
+            <div class="award-tag">🏆 Certificate of Appreciation for Outstanding Performance (H1 & H2 2023)</div>
+            
+            <ul class="exp-list lang-en">
+                <li>Lead BA teams to analyze, design, and develop large-scale enterprise projects.</li>
+                <li>Collaborate with clients to conduct in-depth business process analysis and propose optimized solution designs.</li>
+                <li>Translate stakeholder needs into technical specifications and functional designs (SRS, URD, UM, Mockups).</li>
+                <li>Execute competitor analysis and market research to drive product enhancements.</li>
+                <li>Facilitate nation-wide system training for over 600 users.</li>
+                <li>Manage and complete technical bidding documentation for key contracts.</li>
+            </ul>
+            <ul class="exp-list lang-vi">
+                <li>Dẫn dắt đội ngũ BA phân tích, thiết kế và phát triển các dự án doanh nghiệp quy mô lớn.</li>
+                <li>Làm việc trực tiếp với khách hàng để phân tích quy trình nghiệp vụ chuyên sâu và đề xuất giải pháp tối ưu.</li>
+                <li>Chuyển đổi nhu cầu của các bên liên quan thành đặc tả kỹ thuật và thiết kế chức năng (SRS, URD, UM, Mockups).</li>
+                <li>Thực hiện phân tích đối thủ và nghiên cứu thị trường để thúc đẩy cải tiến sản phẩm.</li>
+                <li>Tổ chức và trực tiếp triển khai đào tạo hệ thống quy mô toàn quốc cho hơn 600 người dùng.</li>
+                <li>Chủ trì xây dựng và hoàn thiện hồ sơ thầu kỹ thuật cho các hợp đồng quan trọng.</li>
+            </ul>
+            <div class="project-tag-box">
+                <strong class="lang-en">Key Projects:</strong><strong class="lang-vi">Dự án tiêu biểu:</strong>
+                LMS for ACV, Digital Library, School Management System, Payment Service, Enrollment System, Smart Timetable.
+            </div>
+        </div>
+
+        <!-- SIDE PROJECT -->
+        <div class="exp-item">
+            <div class="exp-header">
+                <div>
+                    <div class="exp-role">Project Manager (Side-project)</div>
+                    <div class="exp-comp">Hotel Management Ecosystem</div>
+                </div>
+                <div class="exp-date">12/2023 - 04/2024</div>
+            </div>
+            <ul class="exp-list lang-en">
+                <li>Managed a development team of 6 to deliver a customized hotel management ecosystem.</li>
+                <li>Defined business process workflows and translated client needs into system architecture.</li>
+                <li>Monitored progress and ensured quality control throughout the product delivery lifecycle.</li>
+            </ul>
+            <ul class="exp-list lang-vi">
+                <li>Quản lý nhóm phát triển 6 thành viên để bàn giao hệ sinh thái quản lý khách sạn tùy chỉnh.</li>
+                <li>Xây dựng quy trình nghiệp vụ và chuyển đổi nhu cầu khách hàng thành kiến trúc hệ thống.</li>
+                <li>Giám sát tiến độ và đảm bảo chất lượng trong suốt vòng đời bàn giao sản phẩm.</li>
+            </ul>
+        </div>
+
+        <!-- TRIAX -->
+        <div class="exp-item">
+            <div class="exp-header">
+                <div>
+                    <div class="exp-role">Business Analyst</div>
+                    <div class="exp-comp">Triax Vietnam JSC</div>
+                </div>
+                <div class="exp-date">01/2020 - 05/2021</div>
+            </div>
+            <ul class="exp-list lang-en">
+                <li>Gathered requirements and modeled processes for ERP and HRM systems.</li>
+                <li>Designed product interfaces (Mock-ups) and collaborated with technical/QC teams for development.</li>
+                <li>Conducted UAT testing sessions and managed final product delivery.</li>
+            </ul>
+            <ul class="exp-list lang-vi">
+                <li>Thu thập yêu cầu và mô hình hóa quy trình cho các hệ thống ERP và HRM.</li>
+                <li>Thiết kế giao diện sản phẩm (Mock-up) và phối hợp với đội kỹ thuật/QC để phát triển.</li>
+                <li>Thực hiện các phiên kiểm thử UAT và quản lý bàn giao sản phẩm cuối cùng.</li>
+            </ul>
+        </div>
+
+        <!-- HUY THANH -->
+        <div class="exp-item">
+            <div class="exp-header">
+                <div>
+                    <div class="exp-role">IT & Project Intern</div>
+                    <div class="exp-comp">Huy Thanh Jewelry</div>
+                </div>
+                <div class="exp-date">06/2019 - 11/2019</div>
+            </div>
+            <ul class="exp-list lang-en">
+                <li>Assisted in gathering requirements and testing for internal jewelry management systems.</li>
+                <li>Supported data migration and system maintenance tasks.</li>
+            </ul>
+            <ul class="exp-list lang-vi">
+                <li>Hỗ trợ thu thập yêu cầu và kiểm thử cho các hệ thống quản lý trang sức nội bộ.</li>
+                <li>Hỗ trợ các tác vụ chuyển đổi dữ liệu và bảo trì hệ thống.</li>
+            </ul>
+        </div>
+    </section>
+
+    <section style="background: var(--bg-light);">
+        <div class="container grid-2">
+            <!-- Education -->
+            <div>
+                <h2 class="section-title lang-en">Education</h2>
+                <h2 class="section-title lang-vi">Học vấn</h2>
+                <div class="edu-card">
+                    <h4 style="color:var(--primary); font-size: 1.2rem;">Banking Academy of Vietnam</h4>
+                    <p class="lang-en" style="margin-top:5px;"><strong>Bachelor of Management Information System</strong></p>
+                    <p class="lang-vi" style="margin-top:5px;"><strong>Cử nhân Hệ thống thông tin quản lý</strong></p>
+                    <p style="font-size:0.9rem; color:#666; margin-top:8px;">Graduated: 2020</p>
+                </div>
+            </div>
+
+            <!-- Skills -->
+            <div>
+                <h2 class="section-title lang-en">Core Skills</h2>
+                <h2 class="section-title lang-vi">Kỹ năng cốt lõi</h2>
+                <div class="skills-flex">
+                    <span class="skill-tag">Data Modeling</span>
+                    <span class="skill-tag">SQL & DB Management</span>
+                    <span class="skill-tag">Project Management</span>
+                    <span class="skill-tag">Requirement Engineering</span>
+                    <span class="skill-tag">Stakeholder Management</span>
+                    <span class="skill-tag">Bidding Support</span>
+                    <span class="skill-tag">UAT & Quality Control</span>
+                    <span class="skill-tag">UI/UX Mockups</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-contact">
+                <a href="tel:0387728686">📞 0387728686</a>
+                <a href="mailto:hungnk0203@gmail.com">✉️ hungnk0203@gmail.com</a>
+                <a href="https://badges.iiba.org/b84535ea-8c98-4ed6-961e-e166c20acd4d" target="_blank">🔗 CCBA Badge</a>
+            </div>
+            <p>&copy; 2026 Nguyen Kieu Hung | Senior Business Analyst | CCBA® Professional</p>
+        </div>
+    </footer>
+
+    <script>
+        function setLang(lang) {
+            const btns = document.querySelectorAll('.lang-btn');
+            btns.forEach(b => b.classList.remove('active'));
+            if(lang === 'vi') {
+                document.body.classList.add('vi');
+                document.querySelectorAll('.lang-btn')[1].classList.add('active');
+            } else {
+                document.body.classList.remove('vi');
+                document.querySelectorAll('.lang-btn')[0].classList.add('active');
+            }
+        }
+    </script>
+</body>
+</html>
